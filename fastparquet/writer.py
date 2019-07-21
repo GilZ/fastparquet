@@ -653,7 +653,7 @@ def make_part_file(f, data, schema, compression=None, fmd=None, stats=True):
 
 
 def make_metadata(data, has_nulls=True, ignore_columns=[], fixed_text=None,
-                  object_encoding=None, times='int64', index_cols=[]):
+                  object_encoding=None, times='int64', index_cols=[], stats=True):
     if not data.columns.is_unique:
         raise ValueError('Cannot create parquet dataset with duplicate'
                          ' column names (%s)' % data.columns)
