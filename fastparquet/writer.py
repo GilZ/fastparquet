@@ -622,7 +622,7 @@ def make_row_group(f, data, schema, compression=None, stats=True):
             else:
                 stat = stats
             chunk = write_column(f, data[column.name], column,
-                                 compression=comp, stats=stats)
+                                 compression=comp, stats=stat)
             rg.columns.append(chunk)
     rg.total_byte_size = sum([c.meta_data.total_uncompressed_size for c in
                               rg.columns])
@@ -654,7 +654,7 @@ def make_part_file(f, data, schema, compression=None, fmd=None, stats=True):
 
 
 def make_metadata(data, has_nulls=True, ignore_columns=[], fixed_text=None,
-                  object_encoding=None, times='int64', index_cols=[], stats=True):
+                  object_encoding=None, times='int64', index_cols=[]):
     if not data.columns.is_unique:
         raise ValueError('Cannot create parquet dataset with duplicate'
                          ' column names (%s)' % data.columns)
